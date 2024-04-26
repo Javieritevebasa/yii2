@@ -1,13 +1,11 @@
 <?php
-
 namespace backend\controllers;
 
-use common\models\LoginForm;
 use Yii;
+use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
+use common\models\LoginForm;
 
 /**
  * Site controller
@@ -15,13 +13,13 @@ use yii\web\Response;
 class SiteController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::class,
+                'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -35,7 +33,7 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -44,13 +42,13 @@ class SiteController extends Controller
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function actions()
     {
         return [
             'error' => [
-                'class' => \yii\web\ErrorAction::class,
+                'class' => 'yii\web\ErrorAction',
             ],
         ];
     }
@@ -62,13 +60,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+    	
         return $this->render('index');
     }
 
     /**
      * Login action.
      *
-     * @return string|Response
+     * @return string
      */
     public function actionLogin()
     {
@@ -76,24 +75,20 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $this->layout = 'blank';
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
         }
-
-        $model->password = '';
-
-        return $this->render('login', [
-            'model' => $model,
-        ]);
     }
 
     /**
      * Logout action.
      *
-     * @return Response
+     * @return string
      */
     public function actionLogout()
     {
@@ -101,4 +96,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+	
+	
 }

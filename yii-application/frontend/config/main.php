@@ -1,9 +1,9 @@
 <?php
 $params = array_merge(
-    require __DIR__ . '/../../common/config/params.php',
-    require __DIR__ . '/../../common/config/params-local.php',
-    require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
+    require(__DIR__ . '/../../common/config/params.php'),
+    require(__DIR__ . '/../../common/config/params-local.php'),
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
 );
 
 return [
@@ -14,6 +14,9 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+					        'application/json' => 'yii\web\JsonParser',
+					    ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -28,7 +31,7 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => \yii\log\FileTarget::class,
+                    'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -36,14 +39,22 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        'formatter' => [
+            'dateFormat' => 'dd-MM-yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'EUR',
+       ],
+        
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+            	['class' => 'yii\rest\UrlRule', 'controller' => 'avisows'],
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];

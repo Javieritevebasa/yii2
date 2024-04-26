@@ -15,9 +15,13 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+    	'js/views/dashboard/charDatosEconomicos.js',
+    	'js/views/dashboard/charDatosEconomicosEstacion.js',
+    	'js/views/dashboard/charInspectoresActivos.js',
+    	'js/svgPanZoom.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

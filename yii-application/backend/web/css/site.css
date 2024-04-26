@@ -1,16 +1,34 @@
-main > .container {
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
     padding: 70px 15px 20px;
 }
 
 .footer {
-    background-color: #f5f5f5;
-    font-size: .9em;
     height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
 }
 
-.footer > .container {
-    padding-right: 15px;
-    padding-left: 15px;
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
 }
 
 .not-set {
@@ -20,28 +38,41 @@ main > .container {
 
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
-    content: '';
-    left: 3px;
+    position: relative;
+    top: 1px;
     display: inline-block;
-    width: 0;
-    height: 0;
-    border: solid 5px transparent;
-    margin: 4px 4px 2px 4px;
-    background: transparent;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
 }
 
 a.asc:after {
-    border-bottom: solid 7px #212529;
-    border-top-width: 0;
+    content: /*"\e113"*/ "\e151";
 }
 
 a.desc:after {
-    border-top: solid 7px #212529;
-    border-bottom-width: 0;
+    content: /*"\e114"*/ "\e152";
 }
 
-.grid-view th,
-.grid-view td:last-child {
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view td {
     white-space: nowrap;
 }
 
@@ -64,27 +95,32 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td
+{
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
+.nav > li > form {
+    padding: 8px;
 }
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 0;
-    }
+@media(max-width:768px) {
+	.nav li > form {
+	    padding: 3px;
+	}
 }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
+.nav > li > form > button:hover {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
 }
 
-.nav > li > form > button.logout:focus {
-    outline: none;
-}
+.dropdown-submenu > a { color: #000 !important; }
+
+ .dropdown-submenu ul {padding-inline-start: 2em; !important; }
+
+.dropdown-submenu li {list-style: none}
+
+
+.dropdown-submenu li a { color: #000 !important; margin-right:0.5em; white-space:nowrap;}
